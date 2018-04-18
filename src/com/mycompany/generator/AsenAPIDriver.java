@@ -11,13 +11,13 @@ import com.mycompany.model.MuleApp;
 import com.mycompany.model.MuleFlow;
 import com.sun.media.sound.InvalidFormatException;
 
-public class Asen {
+public class AsenAPIDriver {
 
 	private String sourceCodeProj = "";
 	private String destTestProj = "";
 	private String testCaseProj = "";
-	public static Asen newInstance() {
-		return new Asen();
+	public static AsenAPIDriver newInstance() {
+		return new AsenAPIDriver();
 	}
 	
 	public void init(String filePath) {
