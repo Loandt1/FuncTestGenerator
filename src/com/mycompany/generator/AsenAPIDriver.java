@@ -9,6 +9,7 @@ import org.apache.poi.EncryptedDocumentException;
 
 import com.mycompany.model.MuleApp;
 import com.mycompany.model.MuleFlow;
+import com.mycompany.model.TestCase;
 import com.sun.media.sound.InvalidFormatException;
 
 public class AsenAPIDriver {
@@ -46,9 +47,9 @@ public class AsenAPIDriver {
 		}
 		return arr;
 	}
-	private List<String> getTestCases(String fileSource) throws InvalidFormatException, EncryptedDocumentException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, IOException{
-		ExcelReader reader = ExcelReader.newInstanc();
-		return reader.read(fileSource);
+	private List<TestCase> getTestCases(String fileSource) throws InvalidFormatException, EncryptedDocumentException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, IOException{
+//		ExcelReader reader = ExcelReader.newInstanc();
+		return ExcelReader.read(fileSource);
 	}
 	
 	public void generate() throws InvalidFormatException, EncryptedDocumentException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, IOException{
@@ -60,11 +61,11 @@ public class AsenAPIDriver {
 			System.out.println("List flow size " + app.getListFlows().size());
 			for (int i=0; i<app.getListFlows().size(); i++) {
 				MuleFlow flow = app.getListFlows().get(i);
-				String fileTest = this.testCaseProj + flow.getName()+".xlsx";
-				
+//				String fileTest = this.testCaseProj + flow.getName()+".xlsx";
+				String fileTest = "test.xlsx";
 				this.getTestCases(fileTest);
-				CodeGenerator generator = CodeGenerator.newInstance();
-				generator.genTestForMuleApp(flow,this.destTestProj);
+//				CodeGenerator generator = CodeGenerator.newInstance();
+//				generator.genTestForMuleApp(flow,this.destTestProj);
 			}
 			
 		}
