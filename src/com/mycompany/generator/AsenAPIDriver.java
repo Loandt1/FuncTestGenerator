@@ -63,9 +63,9 @@ public class AsenAPIDriver {
 				MuleFlow flow = app.getListFlows().get(i);
 //				String fileTest = this.testCaseProj + flow.getName()+".xlsx";
 				String fileTest = "test.xlsx";
-				this.getTestCases(fileTest);
-//				CodeGenerator generator = CodeGenerator.newInstance();
-//				generator.genTestForMuleApp(flow,this.destTestProj);
+				List<TestCase> lstTestCase = this.getTestCases(fileTest);
+				CodeGenerator generator = CodeGenerator.newInstance();
+				generator.genTestForMuleApp(flow,this.destTestProj, lstTestCase);
 			}
 			
 		}
