@@ -64,6 +64,7 @@ public class AsenAPIDriver {
 			System.out.println("List flow size " + app.getListFlows().size());
 			for (int i=0; i<app.getListFlows().size(); i++) {
 				MuleFlow flow = app.getListFlows().get(i);
+				System.out.println(flow.getName());
 				String fileTest = this.testCaseResource + flow.getName()+".xlsx";
 				List<TestCase> lstTestCase = this.getTestCases(fileTest);
 				CodeGenerator generator = CodeGenerator.newInstance();
