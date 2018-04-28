@@ -1,30 +1,30 @@
 package com.mycompany.generator;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.poi.EncryptedDocumentException;
+import org.apache.commons.io.FileUtils;
 
 import com.mycompany.model.MuleApp;
 import com.mycompany.model.MuleFlow;
 import com.mycompany.model.TestCase;
-import com.sun.media.sound.InvalidFormatException;
 
 public class AsenAPIDriver {
 
 	private String sourceCodeProj = "";
 	private String destTestProj = "";
-	private String testCaseProj = "";
+	private String testCaseResource = "";
+	private String testCaseJava = "";
 	public static AsenAPIDriver newInstance() {
 		return new AsenAPIDriver();
 	}
 	
 	public void init(String filePath) {
-		this.sourceCodeProj = filePath + "/src/main/app";
+		this.sourceCodeProj = filePath + "/src/main/app/";
 		this.destTestProj = filePath + "/src/test/java/";
-		this.testCaseProj = filePath + "src/test/resources/";
+		this.testCaseResource = filePath + "/src/test/resources/";
+		this.testCaseJava = filePath + "/src/test/java/";
 	}
 	/**
 	 *
@@ -47,22 +47,24 @@ public class AsenAPIDriver {
 		}
 		return arr;
 	}
-	private List<TestCase> getTestCases(String fileSource) throws InvalidFormatException, EncryptedDocumentException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, IOException{
+	private List<TestCase> getTestCases(String fileSource) throws Exception{
 //		ExcelReader reader = ExcelReader.newInstanc();
 		return ExcelReader.read(fileSource);
 	}
 	
-	public void generate() throws InvalidFormatException, EncryptedDocumentException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, IOException{
+	public void generate() throws Exception{
+		//don dep thu muc
+		this.cleanFolder();
+		//lay danh sach file dau vao de scan, xac dinh cac luong xu ly
 		List<String> lstFile = this.getListFiles();
 		for (String f : lstFile){
-			DomParser parser = new DomParser(this.sourceCodeProj+"/" + f);
+			DomParser parser = new DomParser(this.sourceCodeProj + f);
 			MuleApp app = parser.parseFromXml();
 
 			System.out.println("List flow size " + app.getListFlows().size());
 			for (int i=0; i<app.getListFlows().size(); i++) {
 				MuleFlow flow = app.getListFlows().get(i);
-//				String fileTest = this.testCaseProj + flow.getName()+".xlsx";
-				String fileTest = "test.xlsx";
+				String fileTest = this.testCaseResource + flow.getName()+".xlsx";
 				List<TestCase> lstTestCase = this.getTestCases(fileTest);
 				CodeGenerator generator = CodeGenerator.newInstance();
 				generator.genTestForMuleApp(flow,this.destTestProj, lstTestCase);
@@ -70,6 +72,15 @@ public class AsenAPIDriver {
 			
 		}
 	}
+
+	private void cleanFolder() throws Exception{
+		File directory = new File(this.testCaseJava);
+		if (!directory.exists()){
+			directory.mkdir();
+		}else{
+			FileUtils.cleanDirectory(new File(this.testCaseJava));
+		}
+	}//end
 	 
 
 }
