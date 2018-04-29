@@ -71,7 +71,7 @@ public class CodeGenerator {
 
 	public void genTestForMuleApp(MuleFlow flow, String location,List<TestCase> lstTestCase) {
 		try {
-			String fileClassName = StringUtils.capitalize(flow.getName().replaceAll("-", ""));
+			String fileClassName = flow.getName().replaceAll("-", "");
 			String testFileName = new StringBuilder().append(location)
 													 .append(fileClassName)
 													 .append(".java")
@@ -122,6 +122,7 @@ public class CodeGenerator {
 			}
 			writer.write("}");
 			writer.close();
+			System.out.println("FINISHED!");
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

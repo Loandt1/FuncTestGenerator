@@ -1,10 +1,12 @@
 package com.mycompany.generator;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+import org.apache.poi.EncryptedDocumentException;
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import com.mycompany.model.MuleApp;
 import com.mycompany.model.MuleFlow;
@@ -47,8 +49,8 @@ public class AsenAPIDriver {
 		}
 		return arr;
 	}
-	private List<TestCase> getTestCases(String fileSource) throws Exception{
-//		ExcelReader reader = ExcelReader.newInstanc();
+	private List<TestCase> getTestCases(String fileSource) throws Exception {
+
 		return ExcelReader.read(fileSource);
 	}
 	
@@ -82,16 +84,6 @@ public class AsenAPIDriver {
 			FileUtils.cleanDirectory(new File(this.testCaseJava));
 		}
 	}//end
-// "/Users/loandinh/AnypointStudio/workspace/muleesbbegin"
-	public static void main(String[] args) {
-		String path = args[0];
-		AsenAPIDriver a = AsenAPIDriver.newInstance();
-		a.init(path);
-		try {
-			a.generate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 
 }
