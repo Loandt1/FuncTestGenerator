@@ -81,8 +81,8 @@ public class CodeGenerator {
 			//import libs
 			writer.write("import org.mule.api.MuleEvent;"
 					+ "\nimport org.mule.munit.runner.functional.FunctionalMunitSuite;"
-					+ "\nimport org.testng.Assert;"
-					+ "\nimport org.testng.annotations.Test;");
+					+ "\nimport org.junit.Assert;"
+					+ "\nimport org.junit.Test;");
 			writer.newLine();
 			
 			writer.newLine();

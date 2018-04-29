@@ -82,6 +82,16 @@ public class AsenAPIDriver {
 			FileUtils.cleanDirectory(new File(this.testCaseJava));
 		}
 	}//end
-	 
+// "/Users/loandinh/AnypointStudio/workspace/muleesbbegin"
+	public static void main(String[] args) {
+		String path = args[0];
+		AsenAPIDriver a = AsenAPIDriver.newInstance();
+		a.init(path);
+		try {
+			a.generate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }
