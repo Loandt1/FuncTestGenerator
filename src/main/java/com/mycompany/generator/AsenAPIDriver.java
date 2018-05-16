@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.util.SystemOutLogger;
 
 import com.mycompany.model.MuleApp;
 import com.mycompany.model.MuleFlow;
@@ -85,5 +86,20 @@ public class AsenAPIDriver {
 		}
 	}//end
 
-
+	public static void main(String args[]) {
+		if (args != null && args.length > 0) {
+			String path = args[0];
+			AsenAPIDriver a = AsenAPIDriver.newInstance();
+			a.init(path);
+			try {
+				a.generate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+			System.out.println("DONE!");
+		}else {
+			System.out.println("No project was found");
+		}
+		
+	}
 }
