@@ -6,6 +6,6 @@ Class-Path: libs/gson-2.8.3.jar libs/commons-lang3-3.7.jar libs/common
  r libs/xmlbeans-2.6.0.jar libs/stax-api-1.0.1.jar libs/poi-3.12.jar l
  ibs/commons-codec-1.9.jar
 Created-By: Apache Maven 3.3.9
-Build-Jdk: 1.8.0_161
+Build-Jdk: 1.7.0_80
 Main-Class: com.mycompany.generator.AsenAPIDriver
 
